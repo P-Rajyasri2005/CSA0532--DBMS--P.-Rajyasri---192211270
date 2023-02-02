@@ -1,0 +1,66 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use sse;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_sse |
++---------------+
+| empdept       |
+| employee      |
+| mentees       |
+| student       |
+| studepartment |
++---------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++-----------+----------+------+------------+------------+-------+--------------+
+| Regno     | Name     | Dept | Address    | Fathername | Marks | subject      |
++-----------+----------+------+------------+------------+-------+--------------+
+| 192211270 | Rajyasri | CSE  | sullurpeta | Ravi       |    99 | BioEVS       |
+| 192211276 | Mega     | Arts | ramvaram   | Deepak     |    67 | Architecture |
+|  19221183 | Prasana  | CSE  | nellore    | Narayana   |    99 | BioEVS       |
+| 192211236 | Geetha   | ECE  | chennai    | Baskar     |  NULL | PDSD         |
++-----------+----------+------+------------+------------+-------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from mentees group by Marks;
++-----------+----------+------+------------+------------+-------+--------------+
+| Regno     | Name     | Dept | Address    | Fathername | Marks | subject      |
++-----------+----------+------+------------+------------+-------+--------------+
+| 192211236 | Geetha   | ECE  | chennai    | Baskar     |  NULL | PDSD         |
+| 192211276 | Mega     | Arts | ramvaram   | Deepak     |    67 | Architecture |
+| 192211270 | Rajyasri | CSE  | sullurpeta | Ravi       |    99 | BioEVS       |
++-----------+----------+------+------------+------------+-------+--------------+
+3 rows in set (0.01 sec)
+
+mysql> select*from mentees group by Dept;
++-----------+----------+------+------------+------------+-------+--------------+
+| Regno     | Name     | Dept | Address    | Fathername | Marks | subject      |
++-----------+----------+------+------------+------------+-------+--------------+
+| 192211276 | Mega     | Arts | ramvaram   | Deepak     |    67 | Architecture |
+| 192211270 | Rajyasri | CSE  | sullurpeta | Ravi       |    99 | BioEVS       |
+| 192211236 | Geetha   | ECE  | chennai    | Baskar     |  NULL | PDSD         |
++-----------+----------+------+------------+------------+-------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from mentees having marks>90;
++-----------+----------+------+------------+------------+-------+---------+
+| Regno     | Name     | Dept | Address    | Fathername | Marks | subject |
++-----------+----------+------+------------+------------+-------+---------+
+| 192211270 | Rajyasri | CSE  | sullurpeta | Ravi       |    99 | BioEVS  |
+|  19221183 | Prasana  | CSE  | nellore    | Narayana   |    99 | BioEVS  |
++-----------+----------+------+------------+------------+-------+---------+
+2 rows in set (0.00 sec)
