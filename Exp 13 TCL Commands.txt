@@ -1,0 +1,94 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 30
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use sse;
+Database changed
+mysql> create table villages(Sno int(3), Villagename varchar(30), District varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into villages values(1, "Nadavuluru", "Chittoor");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into villages values(2, "Kalasthiri", "Tirupati");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into villages values(3, "Manarpolore", "Nellore");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into villages values(4, "Ramavaram", "Anantapur");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from villages;
++------+-------------+-----------+
+| Sno  | Villagename | District  |
++------+-------------+-----------+
+|    1 | Nadavuluru  | Chittoor  |
+|    2 | Kalasthiri  | Tirupati  |
+|    3 | Manarpolore | Nellore   |
+|    4 | Ramavaram   | Anantapur |
++------+-------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> savepoint ini;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into villages values(5, "Madarapakam", "Tiruchanoor");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from villages;
++------+-------------+-------------+
+| Sno  | Villagename | District    |
++------+-------------+-------------+
+|    1 | Nadavuluru  | Chittoor    |
+|    2 | Kalasthiri  | Tirupati    |
+|    3 | Manarpolore | Nellore     |
+|    4 | Ramavaram   | Anantapur   |
+|    5 | Madarapakam | Tiruchanoor |
++------+-------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> savepoint ins;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update villages set Villagename="Madavaram";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select*from villages;
++------+-------------+-------------+
+| Sno  | Villagename | District    |
++------+-------------+-------------+
+|    1 | Madavaram   | Chittoor    |
+|    2 | Madavaram   | Tirupati    |
+|    3 | Madavaram   | Nellore     |
+|    4 | Madavaram   | Anantapur   |
+|    5 | Madavaram   | Tiruchanoor |
++------+-------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> rollback to ini;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select*from villages;
++------+-------------+-----------+
+| Sno  | Villagename | District  |
++------+-------------+-----------+
+|    1 | Nadavuluru  | Chittoor  |
+|    2 | Kalasthiri  | Tirupati  |
+|    3 | Manarpolore | Nellore   |
+|    4 | Ramavaram   | Anantapur |
++------+-------------+-----------+
+4 rows in set (0.00 sec)
